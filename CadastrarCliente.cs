@@ -1,6 +1,8 @@
 using System;
 using System.IO;
-    
+using NetOffice.ExcelApi;
+
+  
 public class CadastrarCliente
 {
     public void Cadastrarcliente()
@@ -13,23 +15,45 @@ public class CadastrarCliente
         Console.WriteLine("Qual é seu CPF/CNPJ?");
         string cpfecnpj = Console.ReadLine();
         Console.WriteLine("Qual sua cidade?");
-        string cidade = Console.ReadLine();
+        Endereco endereco1 = new Endereco();
+        endereco1.cidade = Console.ReadLine();
         Console.WriteLine("Qual seu bairro?");
-        string bairro = Console.ReadLine();
-        Console.WriteLine("Qual sua rua? (com número)");
-        string rua = Console.ReadLine();
-        
-        
+        endereco1.bairro = Console.ReadLine();
+        Console.WriteLine("Qual sua rua?");
+        endereco1.rua = Console.ReadLine();
+        Console.WriteLine("Número:");
+        endereco1.numero = Console.ReadLine();
+        string cidade = Convert.ToString(endereco1.cidade);
+        string bairro = Convert.ToString(endereco1.bairro);
+        string rua = Convert.ToString(endereco1.rua);
+        string numero = Convert.ToString(endereco1.numero);
 
-
-        // StreamWriter cadastro = new StreamWriter ("Cadastro.txt", true);
-        // FileInfo cabecalho = new FileInfo("Cadastro.txt");
-        // if(cabecalho.Length == 0)
-        // {
-        //     cadastro.WriteLine ("NOME; E-MAIL; CPF/CNPJ; DATA E HORA");
-        // }
-        // cadastro.WriteLine(nome + ";" + email + ";" + cpfecnpj + ";" + DateTime.Now);
-        // cadastro.Close();
-        
+       
+        if(!File.Exists(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\clientes.xls"))
+        {
+            Criarexcel(nome, email, cpfecnpj, cidade, bairro, rua, numero);
+        }
+        else
+        {
+            //modificar arquivo, sem criar outro ou sobrepor
+        }
     }
-}          
+    public void Criarexcel(string nome, string email, string cpfecnpj, string cidade, string bairro, string rua, string numero)
+    {    
+        Application ex = new Application();
+        ex.Workbooks.Add();
+        ex.Cells[1,1].Value = nome;
+        ex.Cells[1,2].Value = email;
+        ex.Cells[1,3].Value = cpfecnpj;
+        ex.Cells[1,4].Value = cidade;
+        ex.Cells[1,5].Value = bairro;
+        ex.Cells[1,6].Value = rua;
+        ex.Cells[1,6].Value = numero;
+
+        ex.ActiveWorkbook.SaveAs(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\clientes.xls");
+        ex.Quit();
+    }
+}     
+        
+    
+          
