@@ -71,6 +71,7 @@ public class CadastrarCliente
 
         ex.ActiveWorkbook.SaveAs(@"C:\Users\40809588897\Desktop\Programar\Semana 4\casaconcessionaria\clientes.xls");
         ex.Quit();
+        ex.Dispose();
     }
 }     
 }      

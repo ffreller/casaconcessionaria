@@ -70,6 +70,7 @@ namespace casaconcessionaria{
 
         ex.ActiveWorkbook.SaveAs(@"C:\Users\40809588897\Desktop\Programar\Semana 4\casaconcessionaria\carros.xls");
         ex.Quit();
+        ex.Dispose();
     }
             
 

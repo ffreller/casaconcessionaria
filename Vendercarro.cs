@@ -40,12 +40,21 @@ namespace casaconcessionaria{
             } while (ex.Cells[contador,1].Value != null);
             Console.WriteLine("Digite o nome do carro que deseja");
             string carroescolhido = Console.ReadLine();
-
+            contador = 1;
             do
             {
-
+                if(ex.Cells[contador,1].Value.ToString () == carroescolhido)
+                {
+                    Console.WriteLine("Você escolhe o carro: " + carroescolhido);
+                }
+                else
+                {
+                    contador += 1;
+                }
+                
             }
-            while (carrosescolhido ex.Cells[contador,1].Value)
+            while (ex.Cells[contador,1].Value.ToString() != carroescolhido);
+
 
             Console.WriteLine("Como deseja pagar? (digite 1 para a vista com 5% de desconto e 2 para a prazo)");
             string vistaprazo = Console.ReadLine();
@@ -54,8 +63,9 @@ namespace casaconcessionaria{
                 
                 if (vistaprazo == "1")
                 {
-                    double preco = Convert.ToDouble(ex.Cells[contador,3]);
+                    double preco = Convert.ToDouble(ex.Cells[contador,3].Value);
                     preco = preco * 95/100;
+                    Console.WriteLine(preco);
                 }
                 else if (vistaprazo == "2")
                 {
@@ -66,7 +76,7 @@ namespace casaconcessionaria{
                         Console.WriteLine("2, 4 ou 8 parcelas?");
                         parcelas = Convert.ToDouble(Console.ReadLine());
                         Console.WriteLine("O preço fica:");
-                        double preco = Convert.ToDouble(ex.Cells[contador,3]);
+                        double preco = Convert.ToDouble(ex.Cells[contador,3].Value);
                         preco = preco/parcelas; 
                         Console.WriteLine(parcelas + "parcelas de" + preco);
 
