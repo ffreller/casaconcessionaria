@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace sistema_vendas
+namespace casaconcessionária
 {class Program
 
     {static void Main(string[] args)
@@ -25,12 +25,12 @@ namespace sistema_vendas
                 case "2":CadastrarCarro carro1 = new CadastrarCarro();
                          carro1.Cadastrarcarro();   
                 break;
-                case "3":RealizarVenda venda1 = new RealizarVenda();
-                         venda1.Realizarvenda();   
-                break;
-                case "4": ListarCarros lista1 = new ListarCarros();
-                         lista1.Listarcarros(); 
-                break;
+                // case "3":RealizarVenda venda1 = new RealizarVenda();
+                //          venda1.Realizarvenda();   
+                // //break;
+                // //case "4": ListarCarros lista1 = new ListarCarros();
+                // //         lista1.Listarcarros(); 
+                // break;
                 case "5":
                         {Console.WriteLine("Deseja realmente sair(s ou n)");
                         string sair = Console.ReadLine();

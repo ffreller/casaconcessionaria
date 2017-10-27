@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using NetOffice.ExcelApi;
-
+namespace casaconcessionária{
   
 public class CadastrarCliente
 {
@@ -52,6 +52,7 @@ public class CadastrarCliente
             ex.Cells[contador,5].Value = bairro;
             ex.Cells[contador,6].Value = rua;
             ex.Cells[contador,6].Value = numero;
+            ex.Save(@"clientes.xls");
             ex.Quit();
         }
     }
@@ -71,6 +72,6 @@ public class CadastrarCliente
         ex.Quit();
     }
 }     
-        
+}      
     
           

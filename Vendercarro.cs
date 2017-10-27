@@ -4,5 +4,6 @@ using NetOffice.ExcelApi;
 
 namespace casaconcessionária{
     
-    public class Vendercarro{
+    public class Vendercarro{}
+}
     
