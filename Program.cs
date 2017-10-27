@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace casaconcessionária
+namespace casaconcessionaria
 {class Program
 
     {static void Main(string[] args)

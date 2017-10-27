@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using NetOffice.ExcelApi;
 
-namespace casaconcessionária{
+namespace casaconcessionaria{
     
     public class CadastrarCarro{
     
@@ -37,6 +37,7 @@ namespace casaconcessionária{
         else
         {
             Application ex = new Application();
+            ex.DisplayAlerts = false;
             ex.Workbooks.Open(@"C:\Users\40809588897\Desktop\Programar\Semana 4\casaconcessionaria\carros.xls");
             int contador = 1;
             do
@@ -44,7 +45,7 @@ namespace casaconcessionária{
                 contador += 1;
                 
 
-            } while (ex.Cells[contador,1] == null);
+            } while (ex.Cells[contador,1].Value != null);
             ex.Cells[contador,1].Value = modelocarro;
             ex.Cells[contador,2].Value = anocarro;
             ex.Cells[contador,3].Value = precocarro;

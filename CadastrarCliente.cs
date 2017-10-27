@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using NetOffice.ExcelApi;
-namespace casaconcessionária{
+namespace casaconcessionaria{
   
 public class CadastrarCliente
 {
@@ -29,22 +29,22 @@ public class CadastrarCliente
         string numero = Convert.ToString(endereco1.numero);
 
        
-        if(!File.Exists(@"clientes.xls"))
+        if(!File.Exists(@"C:\Users\40809588897\Desktop\Programar\Semana 4\casaconcessionaria\clientes.xls"))
         {
             Criarexcel(nome, email, cpfecnpj, cidade, bairro, rua, numero);
         }
         else
         {
             Application ex = new Application();
-            ex.Workbooks.Open(@"clientes.xls");
+            ex.DisplayAlerts = false;
+            ex.Workbooks.Open(@"C:\Users\40809588897\Desktop\Programar\Semana 4\casaconcessionaria\clientes.xls");
             int contador = 1;
             do
             {
                 contador += 1;
 
-            } while (ex.Cells[contador,1] != null);
+            } while (ex.Cells[contador,1].Value != null);
             
-            ex.Workbooks.Add();
             ex.Cells[contador,1].Value = nome;
             ex.Cells[contador,2].Value = email;
             ex.Cells[contador,3].Value = cpfecnpj;
@@ -52,8 +52,9 @@ public class CadastrarCliente
             ex.Cells[contador,5].Value = bairro;
             ex.Cells[contador,6].Value = rua;
             ex.Cells[contador,6].Value = numero;
-            ex.Save(@"clientes.xls");
+            ex.ActiveWorkbook.Save();
             ex.Quit();
+            ex.Dispose();
         }
     }
     public void Criarexcel(string nome, string email, string cpfecnpj, string cidade, string bairro, string rua, string numero)
@@ -68,7 +69,7 @@ public class CadastrarCliente
         ex.Cells[1,6].Value = rua;
         ex.Cells[1,6].Value = numero;
 
-        ex.ActiveWorkbook.SaveAs(@"clientes.xls");
+        ex.ActiveWorkbook.SaveAs(@"C:\Users\40809588897\Desktop\Programar\Semana 4\casaconcessionaria\clientes.xls");
         ex.Quit();
     }
 }     
