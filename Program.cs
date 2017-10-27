@@ -25,9 +25,9 @@ namespace casaconcessionaria
                 case "2":CadastrarCarro carro1 = new CadastrarCarro();
                          carro1.Cadastrarcarro();   
                 break;
-                // case "3":RealizarVenda venda1 = new RealizarVenda();
-                //          venda1.Realizarvenda();   
-                // //break;
+                case "3":VenderCarro venda1 = new VenderCarro();
+                         venda1.Vendercarro();   
+                break;
                 // //case "4": ListarCarros lista1 = new ListarCarros();
                 // //         lista1.Listarcarros(); 
                 // break;
