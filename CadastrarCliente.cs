@@ -29,13 +29,30 @@ public class CadastrarCliente
         string numero = Convert.ToString(endereco1.numero);
 
        
-        if(!File.Exists(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\clientes.xls"))
+        if(!File.Exists(@"clientes.xls"))
         {
             Criarexcel(nome, email, cpfecnpj, cidade, bairro, rua, numero);
         }
         else
         {
-            //modificar arquivo, sem criar outro ou sobrepor
+            Application ex = new Application();
+            ex.Workbooks.Open(@"clientes.xls");
+            int contador = 1;
+            do
+            {
+                contador += 1;
+
+            } while (ex.Cells[contador,1] != null);
+            
+            ex.Workbooks.Add();
+            ex.Cells[contador,1].Value = nome;
+            ex.Cells[contador,2].Value = email;
+            ex.Cells[contador,3].Value = cpfecnpj;
+            ex.Cells[contador,4].Value = cidade;
+            ex.Cells[contador,5].Value = bairro;
+            ex.Cells[contador,6].Value = rua;
+            ex.Cells[contador,6].Value = numero;
+            ex.Quit();
         }
     }
     public void Criarexcel(string nome, string email, string cpfecnpj, string cidade, string bairro, string rua, string numero)
@@ -50,7 +67,7 @@ public class CadastrarCliente
         ex.Cells[1,6].Value = rua;
         ex.Cells[1,6].Value = numero;
 
-        ex.ActiveWorkbook.SaveAs(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\clientes.xls");
+        ex.ActiveWorkbook.SaveAs(@"clientes.xls");
         ex.Quit();
     }
 }     

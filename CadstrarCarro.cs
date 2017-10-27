@@ -22,31 +22,45 @@ namespace casaconcessionária{
             opcionais1.airbag = Console.ReadLine();
             Console.WriteLine("Freios ABS? (s ou n)");
             opcionais1.abs = Console.ReadLine();
-            string arcon = Convert.ToString(opcionais1.arcon);
-            string airbag = Convert.ToString(opcionais1.airbag);
-            string abs = Convert.ToString(opcionais1.abs);
             
-        if(!File.Exists(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\carros.xls"))
+            
+        if(!File.Exists(@"carros.xls"))
         {
-            Criarexcel(modelocarro, anocarro, precocarro, opcionais1.arcon, opcionais1.airbag, opcionais1.abs);
+            Criarexcel(modelocarro, anocarro, precocarro, opcionais1);
         }
         else
         {
-            //modificar arquivo, sem criar outro ou sobrepor
+            Application ex = new Application();
+            ex.Workbooks.Open(@"clientes.xls");
+            int contador = 1;
+            do
+            {
+                contador += 1;
+
+            } while (ex.Cells[contador,1] != null);
+            
+            ex.Workbooks.Add();
+            ex.Cells[contador,1].Value = modelocarro;
+            ex.Cells[contador,2].Value = anocarro;
+            ex.Cells[contador,3].Value = precocarro;
+            ex.Cells[contador,4].Value = opcionais1.arcon;
+            ex.Cells[contador,5].Value = opcionais1.airbag;
+            ex.Cells[contador,6].Value = opcionais1.abs;
+            ex.Quit();
         }
     }
-    public void Criarexcel(string modelocarro, string anocarro, string precocarro, string arcon, string airbag, string abs)
+    public void Criarexcel(string modelocarro, string anocarro, string precocarro,  Opcionais opcionais1)
     {    
         Application ex = new Application();
         ex.Workbooks.Add();
         ex.Cells[1,1].Value = modelocarro;
         ex.Cells[1,2].Value = anocarro;
         ex.Cells[1,3].Value = precocarro;
-        ex.Cells[1,4].Value = arcon;
-        ex.Cells[1,5].Value = airbag;
-        ex.Cells[1,6].Value = abs;
+        ex.Cells[1,4].Value = opcionais1.arcon;
+        ex.Cells[1,5].Value = opcionais1.airbag;
+        ex.Cells[1,6].Value = opcionais1.abs;
 
-        ex.ActiveWorkbook.SaveAs(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\carros.xls");
+        ex.ActiveWorkbook.SaveAs(@"carros.xls");
         ex.Quit();
     }
             
@@ -54,14 +68,3 @@ namespace casaconcessionária{
 
             }   
     }
-}    
-        //     StreamWriter cadastroproduto = new StreamWriter ("Cadastroproduto.txt", true);
-        //     cadastroproduto.Write(nomeproduto + ";" + codigoproduto + ";" + descricaoproduto + ";" + precoproduto + ";");
-        //     cadastroproduto.Close();
-        //     FileInfo cabecalho = new FileInfo("Cadastroproduto.txt");
-        //     if(cabecalho.Length == 0)
-        //     {
-        //         cadastroproduto.WriteLine ("NOME DO PRODUTO; CÓDIGO DO PRODUO; DESCRIÇÃO DO PRODUTO; PREÇO;");
-        //     }
-        // }
-        //     }
