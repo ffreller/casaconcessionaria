@@ -111,33 +111,42 @@ namespace casaconcessionaria{
         if(!File.Exists(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\vendas.xls"))
         {
             Criarexcelvenda(cl1, cl2, cl3, cl4, cl5, cl6, cr1, cr2, cr3, cr4, cr5, cr6);
+            ax.Quit();
+            ax.Dispose();
+            ex.Quit();
+            ex.Dispose();
         }
         else
         {
-            ex.DisplayAlerts = false;
-            ex.Workbooks.Open(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\vendas.xls");
+            Application ox = new Application();
+            ox.DisplayAlerts = false;
+            ox.Workbooks.Open(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\vendas.xls");
             int contador3 = 1;
             do
             {
                 contador3 += 1;
 
-            } while (ex.Cells[contador3,1].Value != null);
+            } while (ox.Cells[contador3,1].Value != null);
             
             
-            ex.Cells[contador3,1].Value = ax.Cells[contador1,1].Value;
-            ex.Cells[contador3,2].Value = ax.Cells[contador1,2].Value;
-            ex.Cells[contador3,3].Value = ax.Cells[contador1,3].Value;
-            ex.Cells[contador3,4].Value = ax.Cells[contador1,4].Value;
-            ex.Cells[contador3,5].Value = ax.Cells[contador1,5].Value;
-            ex.Cells[contador3,6].Value = ax.Cells[contador1,6].Value;
-            ex.Cells[contador3,7].Value = ex.Cells[contador,1].Value;
-            ex.Cells[contador3,8].Value = ex.Cells[contador,2].Value;
-            ex.Cells[contador3,9].Value = ex.Cells[contador,3].Value;
-            ex.Cells[contador3,10].Value = ex.Cells[contador,4].Value;
-            ex.Cells[contador3,11].Value = ex.Cells[contador,5].Value;
-            ex.Cells[contador3,12].Value = ex.Cells[contador,6].Value;
+            ox.Cells[contador3,1].Value = ax.Cells[contador1,1].Value;
+            ox.Cells[contador3,2].Value = ax.Cells[contador1,2].Value;
+            ox.Cells[contador3,3].Value = ax.Cells[contador1,3].Value;
+            ox.Cells[contador3,4].Value = ax.Cells[contador1,4].Value;
+            ox.Cells[contador3,5].Value = ax.Cells[contador1,5].Value;
+            ox.Cells[contador3,6].Value = ax.Cells[contador1,6].Value;
+            ox.Cells[contador3,7].Value = ex.Cells[contador,1].Value;
+            ox.Cells[contador3,8].Value = ex.Cells[contador,2].Value;
+            ox.Cells[contador3,9].Value = ex.Cells[contador,3].Value;
+            ox.Cells[contador3,10].Value = ex.Cells[contador,4].Value;
+            ox.Cells[contador3,11].Value = ex.Cells[contador,5].Value;
+            ox.Cells[contador3,12].Value = ex.Cells[contador,6].Value;
         
-            ex.ActiveWorkbook.Save();
+            ox.ActiveWorkbook.Save();
+            ox.Quit();
+            ox.Dispose();
+            ax.Quit();
+            ax.Dispose();
             ex.Quit();
             ex.Dispose();
         }
