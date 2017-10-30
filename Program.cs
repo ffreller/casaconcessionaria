@@ -28,9 +28,9 @@ namespace casaconcessionaria
                 case "3":VenderCarro venda1 = new VenderCarro();
                          venda1.Vendercarro();   
                 break;
-                // //case "4": ListarCarros lista1 = new ListarCarros();
-                // //         lista1.Listarcarros(); 
-                // break;
+                case "4": ListarCarros lista1 = new ListarCarros();
+                        lista1.Listarcarros(); 
+                break;
                 case "5":
                         {Console.WriteLine("Deseja realmente sair(s ou n)");
                         string sair = Console.ReadLine();
