@@ -9,20 +9,21 @@ namespace casaconcessionaria{
         public void Vendercarro()
         {
             Application ax = new Application();
-            int contador1 = 1;
+            int contador1 = 0;
             int contador = 1;
             Console.WriteLine("Digite seu CPF/CNPJ");
             string cpfcnpj = Console.ReadLine();
             ax.Workbooks.Open(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\clientes.xls");
             do
             {
-                contador1 += 1;   
+                contador1 += 1;
             }
             while (ax.Cells[contador1,3].Value.ToString() != cpfcnpj);
-            
+                      
             // nao pode travar (escolher um cpf que nao esta na lista)
+                 
             if(ax.Cells[contador1,3].Value.ToString() == cpfcnpj)
-            {         
+            {
             Console.WriteLine("Carros Disponíveis:");
             Application ex = new Application();
             ex.Workbooks.Open(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\carros.xls");
@@ -66,27 +67,25 @@ namespace casaconcessionaria{
 
             Console.WriteLine("Como deseja pagar? (digite 1 para a vista com 5% de desconto e 2 para a prazo)");
             string vistaprazo = Console.ReadLine();
+            double parcelas = 1;
+            double preco = Convert.ToDouble(ex.Cells[contador,3].Value);
             do
             {
-                
                 if (vistaprazo == "1")
                 {
-                    double preco = Convert.ToDouble(ex.Cells[contador,3].Value);
                     preco = preco * 95/100;
                     Console.WriteLine("O preço fica " + preco);
                 }
                 else if (vistaprazo == "2")
                 {
                     Console.WriteLine("Em quantas parcelas deseja pagar?");
-                    double parcelas;
                     do
                     {
                         Console.WriteLine("2, 4 ou 8 parcelas?");
                         parcelas = Convert.ToDouble(Console.ReadLine());
                         Console.WriteLine("O preço fica: ");
-                        double preco = Convert.ToDouble(ex.Cells[contador,3].Value);
-                        preco = preco/parcelas; 
-                        Console.WriteLine(parcelas + " parcelas de " + preco + " reais");
+                        double precoparcela = preco/parcelas; 
+                        Console.WriteLine(parcelas + " parcelas de " + precoparcela + " reais");
 
                     }
                     while (parcelas != 2 && parcelas != 4 && parcelas != 8);
@@ -110,7 +109,7 @@ namespace casaconcessionaria{
         
         if(!File.Exists(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\vendas.xls"))
         {
-            Criarexcelvenda(cl1, cl2, cl3, cl4, cl5, cl6, cr1, cr2, cr3, cr4, cr5, cr6);
+            Criarexcelvenda(preco, parcelas, cl1, cl2, cl3, cl4, cl5, cl6, cr1, cr2, cr3, cr4, cr5, cr6);
             ax.Quit();
             ax.Dispose();
             ex.Quit();
@@ -141,6 +140,8 @@ namespace casaconcessionaria{
             ox.Cells[contador3,10].Value = ex.Cells[contador,4].Value;
             ox.Cells[contador3,11].Value = ex.Cells[contador,5].Value;
             ox.Cells[contador3,12].Value = ex.Cells[contador,6].Value;
+            ox.Cells[contador3,13].Value = preco;
+            ox.Cells[contador3,14].Value = parcelas;
         
             ox.ActiveWorkbook.Save();
             ox.Quit();
@@ -152,7 +153,8 @@ namespace casaconcessionaria{
         }
             }
         }
-    public void Criarexcelvenda(string cl1, string cl2, string cl3, string cl4, string cl5, string cl6, string cr1, string cr2, string cr3, string cr4, string cr5, string cr6)
+        
+    public void Criarexcelvenda(double preco, double parcelas, string cl1, string cl2, string cl3, string cl4, string cl5, string cl6, string cr1, string cr2, string cr3, string cr4, string cr5, string cr6)
     {    
         Application ix = new Application();
         ix.Workbooks.Add();
@@ -168,13 +170,19 @@ namespace casaconcessionaria{
         ix.Cells[1,10].Value = cr4;
         ix.Cells[1,11].Value = cr5;
         ix.Cells[1,12].Value = cr6;
+        ix.Cells[1,13].Value = preco;
+        ix.Cells[1,14].Value = parcelas;
         
         ix.ActiveWorkbook.SaveAs(@"C:\Users\Fabio Freller\Documents\Programar\casaconcessionaria\vendas.xls");
         ix.Quit();
         ix.Dispose();
     }
             
-            
+    
+
+
         }
     }
+
+    
     
